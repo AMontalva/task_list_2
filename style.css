@@ -1,6 +1,10 @@
 body {
   background-color: #333;
 }
+.selectGoalNumber {
+  color: #FFF;
+}
+
 .box {
 	width: 100px;
 	height: 100px;

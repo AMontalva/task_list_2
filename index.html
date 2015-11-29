@@ -7,11 +7,23 @@
 </head>
 <body>
 	<div id="app">
-	  <input v-model="goalNumber">
-	  <button v-on:click="displayGoalNumber">Goal Number</button>
-	  <input v-model="goalNumberAchieved">
-	  <button v-on:click="displayGoalNumberAchieved">Goal Number Achieved</button>
-	<div id="goal_container"></div>
+		<select v-model="selected">
+		  <option v-for="goalNumber in goalNumbers" v-bind:value="goalNumber.value">
+		    {{ goalNumber.text }}
+		  </option>
+		</select>
+		<span class="selectGoalNumber">Selected Goal Number: {{ selected }}</span>
+	  <button v-on:click.prevent="displayGoalNumber">Goal Number</button>
+
+		<span id="select_achieved_container">
+			<select v-model="achieved" id="select_achieved">
+				<option selected="0" class="option_achieved">0</option>
+			</select>
+		</span>
+		<span class="selectGoalNumber">Selected Achieve Number: {{ achieved }}</span>
+	  <button v-on:click.prevent="displayAchieved">Achieved</button>
+
+		<div id="goal_container"></div>
 	</div>
 	<script src="vue.js"></script>
 	<script src="app.js"></script>
