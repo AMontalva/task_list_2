@@ -7,24 +7,24 @@
 </head>
 <body>
 	<div id="app">
-		<select v-model="selected">
+		<select v-model="selected" v-on:change.prevent="displayGoalNumber">
 		  <option v-for="goalNumber in goalNumbers" v-bind:value="goalNumber.value">
 		    {{ goalNumber.text }}
 		  </option>
 		</select>
 		<span class="selectGoalNumber">Selected Goal Number: {{ selected }}</span>
-	  <button v-on:click.prevent="displayGoalNumber">Goal Number</button>
 
-		<span id="select_achieved_container">
-			<select v-model="achieved" id="select_achieved">
-				<option selected="0" class="option_achieved">0</option>
+		<span id="achieved_container">
+			<select v-model="achieved" v-on:change="displayAchieved" id="select_achieved">
+				<option value="0">0</option>
 			</select>
 		</span>
+		<h1>{{ achieved }}</h1>
 		<span class="selectGoalNumber">Selected Achieve Number: {{ achieved }}</span>
-	  <button v-on:click.prevent="displayAchieved">Achieved</button>
 
 		<div id="goal_container"></div>
 	</div>
+
 	<script src="vue.js"></script>
 	<script src="app.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

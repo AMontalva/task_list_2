@@ -8,12 +8,11 @@ new Vue({
     ]
   },
   methods: {
-    displayGoalNumber: function(e) {
-      e.preventDefault();
-      this.deleteReplaceGoalsContainer();
+    displayGoalNumber: function() {
+      this.resetGoalsContainer();
 
+      var select_achieved = document.getElementById("select_achieved");
       var option = document.createElement("option");
-      option.setAttribute("class", "option_achieved");
       option.text = "0";
       option.value = 0;
       select_achieved.appendChild(option);
@@ -27,7 +26,6 @@ new Vue({
 
         // add new options to select
         var option = document.createElement("option");
-        option.setAttribute("class", "option_achieved");
         option.text = i + 1;
         option.value = i + 1;
         select_achieved.appendChild(option);
@@ -39,37 +37,42 @@ new Vue({
       var hue = 120 * value;
       return 'hsl('+hue+',100%,50%)';
     },
-    deleteReplaceGoalsContainer: function() {
+    resetGoalsContainer: function() {
+      // remove goal_container
       var app_container = document.getElementById("app");
-
       var goal_container = document.getElementById("goal_container");
       app_container.removeChild(goal_container);
+      // add goal_container
       var goal_container = document.createElement("div");
-      app_container.appendChild(goal_container);
       goal_container.setAttribute("id", "goal_container");
-      // remove select
-      var select_achieved_container = document.getElementById("select_achieved_container");
-      var select_achieved = document.getElementById("select_achieved");
-      var option_achieved = document.getElementsByClassName("option_achieved");
-      select_achieved_container.removeChild(select_achieved);
-      // add select
-      var select_achieved = document.createElement("select");
-      select_achieved.setAttribute("v-model", "achieved");
-      select_achieved.setAttribute("id", "select_achieved");
-      select_achieved_container.appendChild(select_achieved);
-
+      app_container.appendChild(goal_container);
+      // reset options in select
+      document.getElementById("select_achieved").options.length = 0;
     },
-    displayAchieved: function(e) {
-      e.preventDefault();
-      this.deleteReplaceGoalsContainer()
+    displayAchieved: function() {
+      this.resetGoalsContainer();
+      var select_achieved = document.getElementById("select_achieved");
+      var option = document.createElement("option");
+      option.text = "0";
+      option.value = 0;
+      select_achieved.appendChild(option);
       for(i=0; i<this.achieved; i++) {
+        // create boxes
         var span_box = document.createElement("span");
         span_box.setAttribute("class", "box");
         var percent = i / this.achieved;
-        console.log(percent);
         span_box.style.backgroundColor=this.hsl_col_perc(percent);
         goal_container.appendChild(span_box);
       }
-    }
+      for(i=0; i<this.selected; i++) {
+        // add new options to select
+        var option = document.createElement("option");
+        option.text = i + 1;
+        option.value = i + 1;
+        select_achieved.appendChild(option);
+      }
+      // change achieved
+      this.achieved = this.selected;
+    },
   }
 })
