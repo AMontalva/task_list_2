@@ -10,7 +10,6 @@ new Vue({
   methods: {
     displayGoalNumber: function() {
       this.resetGoalsContainer();
-
       var select_achieved = document.getElementById("select_achieved");
       var option = document.createElement("option");
       option.text = "0";
@@ -23,15 +22,14 @@ new Vue({
         var percent = i / this.selected;
         span_box.style.borderColor=this.hsl_col_perc(percent);
         goal_container.appendChild(span_box);
-
+        var elements = document.getElementsByClassName('box');
+        console.log(elements);
         // add new options to select
         var option = document.createElement("option");
         option.text = i + 1;
         option.value = i + 1;
         select_achieved.appendChild(option);
       }
-      // change achieved
-      this.achieved = this.selected;
     },
     hsl_col_perc: function(value) {
       var hue = 120 * value;
@@ -50,29 +48,14 @@ new Vue({
       document.getElementById("select_achieved").options.length = 0;
     },
     displayAchieved: function() {
-      this.resetGoalsContainer();
-      var select_achieved = document.getElementById("select_achieved");
-      var option = document.createElement("option");
-      option.text = "0";
-      option.value = 0;
-      select_achieved.appendChild(option);
+      // reset goal_container
+      this.displayGoalNumber();
+      // get box class and fill background color by number achieved
+      var elements = document.getElementsByClassName('box');
       for(i=0; i<this.achieved; i++) {
-        // create boxes
-        var span_box = document.createElement("span");
-        span_box.setAttribute("class", "box");
-        var percent = i / this.achieved;
-        span_box.style.backgroundColor=this.hsl_col_perc(percent);
-        goal_container.appendChild(span_box);
+        var percent = i / this.selected;
+        elements[i].style.backgroundColor=this.hsl_col_perc(percent);
       }
-      for(i=0; i<this.selected; i++) {
-        // add new options to select
-        var option = document.createElement("option");
-        option.text = i + 1;
-        option.value = i + 1;
-        select_achieved.appendChild(option);
-      }
-      // change achieved
-      this.achieved = this.selected;
     },
   }
 })

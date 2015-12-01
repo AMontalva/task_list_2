@@ -1,7 +1,12 @@
 body {
   background-color: #333;
 }
-.selectGoalNumber {
+
+.controls {
+   padding-bottom: 20px;
+}
+
+.control_labels {
   color: #FFF;
 }
 
@@ -13,27 +18,4 @@ body {
 	display: inline-block;
 }
 
-#prog {
-	width: 200px;
-	margin: 10px;
-	font-size: 25px;
-	font-family: sans-serif;
-	white-space:nowrap;
-	text-wrap:none;
-  height: 50px;
-  background: #000;
-}
-
-#progress {
-  position: fixed;
-	bottom: 0px;
-	width: 200px;
-	margin: 10px;
-	font-size: 25px;
-	font-family: sans-serif;
-	white-space:nowrap;
-	text-wrap:none;
-  height: 50px;
-  background: #000;
-}
 

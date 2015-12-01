@@ -7,20 +7,22 @@
 </head>
 <body>
 	<div id="app">
-		<select v-model="selected" v-on:change.prevent="displayGoalNumber">
-		  <option v-for="goalNumber in goalNumbers" v-bind:value="goalNumber.value">
-		    {{ goalNumber.text }}
-		  </option>
-		</select>
-		<span class="selectGoalNumber">Selected Goal Number: {{ selected }}</span>
-
-		<span id="achieved_container">
-			<select v-model="achieved" v-on:change="displayAchieved" id="select_achieved">
-				<option value="0">0</option>
+		<div class="controls">
+			<span class="control_labels">Selected Goal Number: {{ selected }}</span>
+			<select v-model="selected" v-on:change.prevent="displayGoalNumber">
+			  <option v-for="goalNumber in goalNumbers" v-bind:value="goalNumber.value">
+			    {{ goalNumber.text }}
+			  </option>
 			</select>
-		</span>
-		<h1>{{ achieved }}</h1>
-		<span class="selectGoalNumber">Selected Achieve Number: {{ achieved }}</span>
+			
+			<span class="control_labels">Achieved Number: {{ achieved }}</span>
+			<span id="achieved_container">
+				<select v-model="achieved" v-on:change="displayAchieved" id="select_achieved">
+					<option value="0">0</option>
+				</select>
+			</span>
+		</div>
+
 
 		<div id="goal_container"></div>
 	</div>
