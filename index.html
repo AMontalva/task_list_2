@@ -7,6 +7,22 @@
 </head>
 <body>
 	<div id="app">
+		<div class="add_controls">
+			<input v-model="newTask">
+			<button v-on:click="addTask">Add Task</button>
+			<span>{{ newTask }}</span>
+		</div>
+
+        <!-- The List of Todos -->
+        <div class="task_list_display">
+            <h1>Tasks</h1>
+            <ol>
+                <li v-for="task in tasks">
+                    <span>{{ task.body }}</span>
+                </li>
+            </ol>
+        </div>
+
 		<div class="controls">
 			<span class="control_labels">Selected Goal Number: {{ selected }}</span>
 			<select v-model="selected" v-on:change.prevent="displayGoalNumber">
@@ -26,6 +42,16 @@
 
 		<div id="goal_container"></div>
 	</div>
+
+    <template id="task-template">
+        <div>
+            <h3>{{ task.name }}</h3>
+            <div>
+                <span>Goal Number: {{ task.goal }}</span>
+                <span>Achieved Number: {{ task.achieve }}</span>
+            </div>
+        </div>
+    </template>
 
 	<script src="vue.js"></script>
 	<script src="app.js"></script>

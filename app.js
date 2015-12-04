@@ -1,6 +1,8 @@
 new Vue({
   el: '#app',
   data: {
+    tasks: [],
+    newTask: '',
     achieved: 0,
     selected: 0,
     goalNumbers: [
@@ -8,6 +10,14 @@ new Vue({
     ]
   },
   methods: {
+    addTask: function(e) {
+      e.preventDefault();
+      var text = this.newTask;
+      if (text) {
+        this.tasks.push({ body: text });
+        this.newTask = '';
+      }
+    },
     displayGoalNumber: function() {
       this.resetGoalsContainer();
       var select_achieved = document.getElementById("select_achieved");
