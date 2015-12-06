@@ -8,22 +8,25 @@
 <body>
     <div id="app">
         <pre>{{ $data | json }}</pre>
+
         <div class="add_controls">
             <input v-model="taskName">
             <button v-on:click="addTask">Add Task</button>
         </div>
 
-
         <h1>Tasks</h1>
         <ol>
             <li v-for="task in tasks">
                 <task :task="task"></task>
+
             </li>
         </ol>
-
         
-        <div id="goal_container"></div>
     </div>
+
+    <template id="prog-template">
+        <div class="goal_container"></div>
+    </template>
 
     <template id="task-template">
         <div>
@@ -31,66 +34,23 @@
             <div>
                 <span>Goal Number: {{ task.goal }}</span>
                 <select name="" id="" v-model="goalSelect" v-on:change="goalNumberSelect">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                  <option v-for="goalOption in goalOptions" v-bind:value="goalOption.value">
+                    {{ goalOption.text }}
+                  </option>
                 </select>
+
                 <span>Achieved Number: {{ task.achieved }}</span>
-                <select name="" id="" v-model="achievedSelect" v-on:change="achievedNumberSelect">
+                <select name="" id="select_achieved" v-model="achievedSelect" v-on:change="achievedNumberSelect">
                     <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
                 </select>
+                <prog></prog>
             </div>
         </div>
     </template>
 
+
     <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.1/vue.js"></script>
-    <script>
-       new Vue({
-          el: "#app",
-          data: {
-            tasks: [],
-            taskName: "",
-            taskGoal: 0,
-            taskAchieved: 0,
-          },
-          methods: {
-            addTask: function() {
-                this.tasks.push({ name: this.taskName,
-                                  goal: this.taskGoal,
-                                  achieved: this.taskAchieved
-                });
-                this.taskName = "";  
-            },
-          },
-
-          components: {
-            task: {
-              template: "#task-template",
-
-              props: ["task"],
-
-              data: function() {
-                return { goalSelect: 0, achievedSelect: 0 }
-              },
-
-              methods: {
-                goalNumberSelect: function() {
-                    this.task.goal = this.goalSelect;
-                },
-                achievedNumberSelect: function() {
-                    this.task.achieved = this.achievedSelect;
-                }
-              },
-
-            }
-          }
-       });
-    </script>
-
+    <script src="app.js"></script>
 </body>
 </html>
 

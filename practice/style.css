@@ -1,0 +1,29 @@
+body {
+  /*background-color: #333;*/
+}
+
+.add_controls {
+   padding-bottom: 20px;
+}
+
+.task_list_display {
+   color: #FFF;
+}
+
+.controls {
+   padding-bottom: 20px;
+}
+
+.control_labels {
+  color: #FFF;
+}
+
+.box {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #333;
+    margin-right: 5px;
+    display: inline-block;
+}
+
+
