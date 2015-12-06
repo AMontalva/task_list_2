@@ -18,7 +18,7 @@
         <ol>
             <li v-for="task in tasks">
                 <task :task="task"></task>
-
+                <div id="{{task.id}}"></div>
             </li>
         </ol>
         
@@ -47,7 +47,6 @@
             </div>
         </div>
     </template>
-
 
     <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.1/vue.js"></script>
     <script src="app.js"></script>

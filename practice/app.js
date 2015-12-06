@@ -29,17 +29,9 @@ var task = Vue.extend({
   methods: {
     goalNumberSelect: function() {
         this.task.goal = this.goalSelect;
-        // var goal_container = document.getElementById("goal_container");
-        // var select_achieved = document.getElementById("select_achieved");
 
-        // var new_progress = document.createElement("div");
-        // new_progress.setAttribute("id", this.task.name);
-        // var goal_container = document.getElementById("goal_container");
-        // console.log("1");
-        var num_prog = document.getElementsByClassName("goal_container");
-        console.log(num_prog.length);
-        // goal_container.appendChild(new_progress);
-        // console.log("2");
+        var id_number = document.getElementById(this.task.id);
+        console.log(id_number);
 
         var option = document.createElement("option");
         option.text = "0";
@@ -47,13 +39,13 @@ var task = Vue.extend({
         select_achieved.appendChild(option);
         for(i=0; i<this.goalSelect; i++) {
           // create boxes
-          // var new_progress = document.getElementById(this.task.name);
-          // var span_box = document.createElement("span");
-          // span_box.setAttribute("class", "box");
-          // var percent = i / this.goalSelect;
-          // span_box.style.borderColor=this.hsl_col_perc(percent);
-          // new_progress.appendChild(span_box);
-          // var elements = document.getElementsByClassName('box');
+          var span_box = document.createElement("span");
+          span_box.setAttribute("class", "box");
+          var percent = i / this.goalSelect;
+          span_box.style.borderColor=this.hsl_col_perc(percent);
+          id_number.appendChild(span_box);
+          var elements = document.getElementsByClassName('box');
+
           // add new options to select
           var option = document.createElement("option");
           option.text = i + 1;
@@ -86,17 +78,17 @@ new Vue({
     taskName: "",
     taskGoal: 0,
     taskAchieved: 0,
+    taskId: 0,
   },
   methods: {
     addTask: function() {
         this.tasks.push({ name: this.taskName,
                           goal: this.taskGoal,
-                          achieved: this.taskAchieved
+                          achieved: this.taskAchieved,
+                          id: this.taskId,
         });
-        
-
-
-        this.taskName = "";  
+        this.taskName = "";
+        this.taskId += 1;
     },
   },
 });
