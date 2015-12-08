@@ -7,21 +7,24 @@
 </head>
 <body>
     <div id="app">
-        <pre>{{ $data | json }}</pre>
-
-        <div class="add_controls">
-            <input v-model="taskName">
-            <button v-on:click="addTask">Add Task</button>
+        <div class="left">
+            <pre>{{ $data | json }}</pre>
         </div>
-
-        <h1>Tasks</h1>
-        <ol>
-            <li v-for="task in tasks">
-                <task :task="task"></task>
-                <div id="{{task.id}}"></div>
-            </li>
-        </ol>
         
+        <div class="right">
+            <div class="add_controls">
+                <input v-model="taskName">
+                <button v-on:click="addTask">Add Task</button>
+            </div>
+
+            <h1>Tasks</h1>
+            <ol>
+                <li v-for="task in tasks">
+                    <task :task="task"></task>
+                    <div id="{{task.id}}"></div>
+                </li>
+            </ol>
+        </div>
     </div>
 
     <template id="prog-template">

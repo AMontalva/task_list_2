@@ -27,9 +27,18 @@ var task = Vue.extend({
   },
 
   methods: {
+    goalReset: function() {
+      if(document.getElementById(this.task.id) !== null) {
+        var del = document.getElementById(this.task.id);
+        while(del.firstChild) {
+          del.removeChild(del.firstChild);
+        }
+      }
+    },
     goalNumberSelect: function() {
         this.task.goal = this.goalSelect;
 
+        this.goalReset();
         var id_number = document.getElementById(this.task.id);
         console.log(id_number);
 
@@ -45,7 +54,6 @@ var task = Vue.extend({
           span_box.style.borderColor=this.hsl_col_perc(percent);
           id_number.appendChild(span_box);
           var elements = document.getElementsByClassName('box');
-
           // add new options to select
           var option = document.createElement("option");
           option.text = i + 1;
