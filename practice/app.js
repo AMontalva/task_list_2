@@ -1,14 +1,4 @@
 /*=================================================================
-                          prog component
-=================================================================*/
-var prog = Vue.extend({
-  template: "#prog-template",
-});
-
-Vue.component("prog", prog);
-
-
-/*=================================================================
                           task component
 =================================================================*/
 var task = Vue.extend({
@@ -27,6 +17,7 @@ var task = Vue.extend({
   },
 
   methods: {
+    // delete all progress boxes
     goalReset: function() {
       if(document.getElementById(this.task.id) !== null) {
         var del = document.getElementById(this.task.id);
@@ -35,35 +26,63 @@ var task = Vue.extend({
         }
       }
     },
+    /* 
+    when goal is selected from dropdown selection:
+      - delete all progress boxes
+      - add options to achieved dropdown selection
+      - create empty progress boxes
+    */
     goalNumberSelect: function() {
         this.task.goal = this.goalSelect;
-
         this.goalReset();
+
         var id_number = document.getElementById(this.task.id);
-        console.log(id_number);
 
         var option = document.createElement("option");
         option.text = "0";
         option.value = 0;
-        select_achieved.appendChild(option);
+
+        if(document.getElementById("select_achieved") !== null) {
+          var select_achieved = document.getElementById("select_achieved");
+          select_achieved.setAttribute("id", "select_achieved" + this.task.id);
+          select_achieved.appendChild(option);
+        }
+        if(document.getElementById("select_achieved" + this.task.id) !== null) {
+          var select_achieved = document.getElementById("select_achieved" + this.task.id);
+          select_achieved.options.length = 0;
+          select_achieved.appendChild(option);
+        }
+
         for(i=0; i<this.goalSelect; i++) {
-          // create boxes
           var span_box = document.createElement("span");
           span_box.setAttribute("class", "box");
           var percent = i / this.goalSelect;
           span_box.style.borderColor=this.hsl_col_perc(percent);
           id_number.appendChild(span_box);
           var elements = document.getElementsByClassName('box');
-          // add new options to select
           var option = document.createElement("option");
           option.text = i + 1;
           option.value = i + 1;
           select_achieved.appendChild(option);
         }
     },
+    /* 
+    when achieved is selected from dropdown selection:
+      - run goalNumberSelect(), resetting the page before taking action
+      - create full progress boxes
+    */
     achievedNumberSelect: function() {
         this.task.achieved = this.achievedSelect;
+
+        this.goalNumberSelect();
+
+        var elements = document.getElementById(this.task.id).querySelectorAll(".box");
+        for(i=0; i<this.achievedSelect; i++) {
+          var percent = i / this.goalSelect;
+          elements[i].style.backgroundColor=this.hsl_col_perc(percent);
+        }
     },
+    // calculate the hsl color for the progress boxes
     hsl_col_perc: function(value) {
       var hue = 120 * value;
       return 'hsl('+hue+',100%,50%)';
@@ -89,6 +108,11 @@ new Vue({
     taskId: 0,
   },
   methods: {
+    /* 
+      - add a task object to the tasks array
+      - reset the task input
+      - increment the id number
+    */
     addTask: function() {
         this.tasks.push({ name: this.taskName,
                           goal: this.taskGoal,

@@ -25,29 +25,22 @@
                 </li>
             </ol>
         </div>
-    </div>
-
-    <template id="prog-template">
-        <div class="goal_container"></div>
-    </template>
+    </div><!-- app END -->
 
     <template id="task-template">
+        <h3>{{ task.name }}</h3>
         <div>
-            <h3>{{ task.name }}</h3>
-            <div>
-                <span>Goal Number: {{ task.goal }}</span>
-                <select name="" id="" v-model="goalSelect" v-on:change="goalNumberSelect">
-                  <option v-for="goalOption in goalOptions" v-bind:value="goalOption.value">
-                    {{ goalOption.text }}
-                  </option>
-                </select>
+            <span>Goal Number: {{ task.goal }}</span>
+            <select name="" id="" v-model="goalSelect" v-on:change="goalNumberSelect">
+              <option v-for="goalOption in goalOptions" v-bind:value="goalOption.value">
+                {{ goalOption.text }}
+              </option>
+            </select>
 
-                <span>Achieved Number: {{ task.achieved }}</span>
-                <select name="" id="select_achieved" v-model="achievedSelect" v-on:change="achievedNumberSelect">
-                    <option value="0">0</option>
-                </select>
-                <prog></prog>
-            </div>
+            <span>Achieved Number: {{ task.achieved }}</span>
+            <select name="" id="select_achieved" v-model="achievedSelect" v-on:change="achievedNumberSelect">
+                <option value="0">0</option>
+            </select>
         </div>
     </template>
 
